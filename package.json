@@ -1,14 +1,14 @@
 {
-  "name": "huxley",
-  "version": "0.7.4",
-  "description": "New wave front-end testing.",
+  "name": "muxley",
+  "version": "0.0.1",
+  "description": "A more gooder node-huxley.",
   "main": "index.js",
   "scripts": {
     "test": "grunt"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/chenglou/node-huxley.git"
+    "url": "https://github.com/bcandullo/muxley"
   },
   "keywords": [
     "node",
@@ -23,12 +23,12 @@
     "hux": "./bin/hux"
   },
   "author": {
-    "name": "chenglou",
-    "email": "chenglou92@gmail.com"
+    "name": "chenglou and brad",
+    "email": "brizad@gmail.com"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/chenglou/node-huxley/issues"
+    "url": "https://github.com/bcandullo/muxley/issues"
   },
   "dependencies": {
     "commander": "~2.1.0",
@@ -50,7 +50,7 @@
   },
   "readme": "# Node-huxley\n\nA port of the codeless front-end testing tool, [Huxley](https://github.com/facebook/huxley), used by Instagram.\n\n- Records your actions as you browse.\n- Takes screenshots.\n- Compares new screenshots against the old ones and checks for differences.\n\n[Grunt task here](https://github.com/chenglou/grunt-huxley).\n\n## Installation\n\n```\nnpm install -g huxley\n```\n\n[Selenium Server](http://docs.seleniumhq.org/download/) is used to automate the recorded browser actions. If you already have it, skip this. Don't have it and don't want the hassle of managing it? Download the [node wrapper](https://github.com/eugeneware/selenium-server) instead.\n\n## Walkthrough and API\n\n`hux -h` for a list of the available commands.\n\nThe API's so short it didn't warrant its own section. This example covers every feature of Huxley. _If you have any Windows or browser issue during the process, see the FAQ below._\n\nIn `examples/` you'll find two completed Huxley tests; we'll reproduce them below.\n\n### Testing the water\n\nLet's start `examples/` from scratch by removing everything _but_ the `webroot/` folder. We'll be testing `component.html`. Take a look.\n\n`cd` into `webroot/` and start a local server. Try `python -m SimpleHTTPServer` (if you're on Python 3.x: `python -m http.server`) or use [this package](https://github.com/nodeapps/http-server) _(at port 8000)_.\n\nBack in `examples/`, create a `Huxleyfile.json`, like this:\n\n```json\n[\n  {\n    \"name\": \"toggle\",\n    \"screenSize\": [1000, 600],\n    \"url\": \"http://localhost:8000/component.html\"\n  },\n  {\n    \"xname\": \"type\",\n    \"url\": \"http://localhost:8000/component.html\"\n  }\n]\n```\n\nEach task is an object. Only `name` and `url` are mandatory and `screenSize` is the only other option. **Note that the second task is marked as `xname`**. This means that the task will be skipped. We'll focus on the first one for now.\n\nStart Selenium (see \"Installation\" above), it doesn't matter where. Now run `hux -r` to start recording. The default Selenium browser is Firefox. Assuming Selenium started correctly, do the following:\n\n- Go to the terminal, press `enter` to record a first browser screenshot.\n- Go to the browser, click on the text field and type 'Hello World'.\n- Back to the terminal again, press `enter` to take a second screenshot.\n- Back to the browser, click on the checkbox.\n- Back to the terminal one last time, `enter` to take a third screenshot.\n- Now press `q` `enter` to quit.\n\nHuxley will then replay your actions and save the screenshots into a folder (notice that your actions are chained one after another without delay for a faster test experience).\n\nOnward!\n\n### \"l\" for \"live\"\n\nWhen you do need delays between actions for animations or AJAX, you can activate a special switch.\n\nOpen `Huxleyfile.json` again. Change the first task's `name` key into `xname` and the second one's `xname` into `name` (i.e. we'll skip the first task and run the second one). Run `hux -r` again:\n\n- Go to the terminal, `l` `enter`. This will capture a screenshot **and** mark a **l**ive playback point. From this point to the next `enter`, Huxley will respect the delay between your actions.\n- Browser: click on `Launch modal`.\n- Terminal: `l` `enter` again, as we'll be dismissing the modal and want to take the screenshot only after the transition's done.\n- Browser: click anywhere to dismiss the modal.\n- Terminal: `enter` to take a regular screenshot (thus marking the end of earlier's live playback), then `q` `enter` to quit.\n\nThat's it! Check your replay and _Don't forget to remove the `x` in `xname` of `Huxleyfile.json`_.\n\nWhen you modify your code in the future, `hux` to compare the new screenshots against the old ones and `hux -u` to update them. **If you want to batch run Huxleyfiles, see `hux --help`**.\n\n## FAQ\n\n### What are the best practices?\n\nNode-huxley is a port, so every recommendation [here](https://github.com/facebook/huxley#best-practices) still applies.\n\n### How do I switch the default browser?\n\nCurrently, only Firefox and Chrome are supported. For Chrome, you need [chromedriver](https://code.google.com/p/chromedriver/downloads/list), which doesn't come bundled with Selenium yet. If you're using [Brew](http://brew.sh), just do `brew install chromedriver`.\n\nStart that then do:\n\n```\nhux -b chrome -flagForWhateverElseYouNeed\n```\n\n### I'm on Windows and ______\n\nMake sure that:\n\n- Java is installed and in your environment path.\n- If the enter key doesn't register while recording, try typing anything (beside the reserved `q` or `l`) before pressing enter.\n- If you're using the `--file` flag, use only forward slashes (`/`) in your pattern.\n",
   "readmeFilename": "README.md",
-  "homepage": "https://github.com/chenglou/node-huxley",
-  "_id": "huxley@0.7.4",
-  "_from": "huxley@^0.7.4"
+  "homepage": "https://github.com/bcandullo/muxley",
+  "_id": "muxley@0.0.1",
+  "_from": "muxley@^0.0.1"
 }

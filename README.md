@@ -1,17 +1,21 @@
-# Node-huxley
+# muxley
 
-A port of the codeless front-end testing tool, [Huxley](https://github.com/facebook/huxley), used by Instagram.
+A fork of node-huxle, which is - A port of the codeless front-end testing tool, [Huxley](https://github.com/facebook/huxley), used by Instagram.
 
 - Records your actions as you browse.
 - Takes screenshots.
 - Compares new screenshots against the old ones and checks for differences.
 
-[Grunt task here](https://github.com/chenglou/grunt-huxley).
+## Muxley Specific
+- Allows executable JavaScript (non-recorded) code in your Huxleyfile.json. Example: `{ "action": "eval", "code": "do.something('on').then($.fn.blah)" }`
+
+## Todo
+- ?
 
 ## Installation
 
 ```
-npm install -g huxley
+npm install -g muxley
 ```
 
 [Selenium Server](http://docs.seleniumhq.org/download/) is used to automate the recorded browser actions. If you already have it, skip this. Don't have it and don't want the hassle of managing it? Download the [node wrapper](https://github.com/eugeneware/selenium-server) instead.
